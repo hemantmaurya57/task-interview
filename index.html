@@ -18,15 +18,35 @@
       color: #ff4d79;
       margin-bottom: 20px;
       font-size: 24px;
+      position: relative;
+    }
+
+    .title::before,
+    .title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 50px;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .title::before {
+      left: 25%;
+    }
+
+    .title::after {
+      right: 25%;
     }
 
     .price-option {
-      border: 2px solid #eee;
+      border: 1px solid #eee;
       border-radius: 8px;
       padding: 15px;
       margin-bottom: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
     }
 
     .price-option.active {
@@ -34,19 +54,20 @@
     }
 
     .price-option.most-popular {
-      border-color: #ff4d79;
+      border: 2px solid #ff4d79;
       position: relative;
     }
 
     .most-popular-tag {
       position: absolute;
-      right: 10px;
-      top: 10px;
+      right: -2px;
+      top: -12px;
       background: #ff4d79;
       color: white;
-      padding: 4px 8px;
+      padding: 4px 12px;
       border-radius: 4px;
       font-size: 12px;
+      font-weight: 500;
     }
 
     .option-header {
@@ -56,13 +77,21 @@
     }
 
     .radio-input {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       margin: 0;
+      accent-color: #ff4d79;
     }
 
     .unit-text {
       font-weight: 500;
+      margin-right: auto;
+    }
+
+    .standard-price {
+      color: #666;
+      font-size: 12px;
+      margin-top: 4px;
     }
 
     .discount-badge {
@@ -75,8 +104,8 @@
     }
 
     .price {
-      float: right;
       font-weight: 600;
+      margin-left: auto;
     }
 
     .original-price {
@@ -84,21 +113,30 @@
       text-decoration: line-through;
       font-size: 14px;
       margin-left: 5px;
+      display: block;
+      text-align: right;
     }
 
-    .options-container {
+    .options-grid {
       display: none;
       margin-top: 15px;
-      grid-gap: 10px;
-      grid-template-columns: 1fr 1fr;
+      gap: 15px;
     }
 
-    .active .options-container {
+    .active .options-grid {
       display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .select-wrapper {
-      width: 100%;
+    .option-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option-label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
     }
 
     select {
@@ -106,13 +144,20 @@
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 4px;
+      background: white;
     }
 
     .delivery-info {
       display: flex;
       justify-content: space-between;
       margin: 20px 0;
+      padding: 10px 0;
       color: #666;
+      border-top: 1px solid #eee;
+    }
+
+    .free-delivery {
+      color: #ff4d79;
     }
 
     .add-to-cart {
@@ -124,6 +169,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: 500;
     }
 
   </style>
@@ -137,11 +183,12 @@
         <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
         <span class="unit-text">1 Unit</span>
         <span class="discount-badge">10% Off</span>
-        <span class="price">
-          $10.00 USD
+        <div class="price-container">
+          <span class="price">$10.00 USD</span>
           <span class="original-price">$24.00 USD</span>
-        </span>
+        </div>
       </div>
+      <div class="standard-price">Standard Price</div>
     </div>
 
     <div class="price-option most-popular" onclick="selectOption(1)">
@@ -150,36 +197,34 @@
         <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
         <span class="unit-text">2 Unit</span>
         <span class="discount-badge">20% Off</span>
-        <span class="price">
-          $18.00 USD
+        <div class="price-container">
+          <span class="price">$18.00 USD</span>
           <span class="original-price">$24.00 USD</span>
-        </span>
+        </div>
       </div>
-      <div class="options-container">
-        <div class="select-wrapper">
+      <div class="options-grid">
+        <div class="option-group">
+          <div class="option-label">#1</div>
           <select>
             <option value="s">S</option>
             <option value="m">M</option>
             <option value="l">L</option>
           </select>
-        </div>
-        <div class="select-wrapper">
           <select>
             <option value="black">Black</option>
             <option value="white">White</option>
             <option value="blue">Blue</option>
           </select>
         </div>
-        <div class="select-wrapper">
+        <div class="option-group">
+          <div class="option-label">#2</div>
           <select>
             <option value="s">S</option>
             <option value="m">M</option>
             <option value="l">L</option>
           </select>
-        </div>
-        <div class="select-wrapper">
           <select>
-            <option value="color">Color</option>
+            <option value="color">Colour</option>
             <option value="black">Black</option>
             <option value="white">White</option>
           </select>
@@ -192,15 +237,15 @@
         <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
         <span class="unit-text">3 Unit</span>
         <span class="discount-badge">30% Off</span>
-        <span class="price">
-          $24.00 USD
+        <div class="price-container">
+          <span class="price">$24.00 USD</span>
           <span class="original-price">$24.00 USD</span>
-        </span>
+        </div>
       </div>
     </div>
 
     <div class="delivery-info">
-      <span>Free Delivery</span>
+      <span class="free-delivery">Free Delivery</span>
       <span>Total : $18.00 USD</span>
     </div>
 
