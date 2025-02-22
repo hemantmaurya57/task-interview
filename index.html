@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      color: #ff4d79;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .price-option {
+      border: 2px solid #eee;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .price-option.active {
+      border-color: #ff4d79;
+    }
+
+    .price-option.most-popular {
+      border-color: #ff4d79;
+      position: relative;
+    }
+
+    .most-popular-tag {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: #ff4d79;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .option-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .radio-input {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+    }
+
+    .unit-text {
+      font-weight: 500;
+    }
+
+    .discount-badge {
+      background: #ff4d79;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+
+    .price {
+      float: right;
+      font-weight: 600;
+    }
+
+    .original-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    .options-container {
+      display: none;
+      margin-top: 15px;
+      grid-gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .active .options-container {
+      display: grid;
+    }
+
+    .select-wrapper {
+      width: 100%;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .delivery-info {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      color: #666;
+    }
+
+    .add-to-cart {
+      width: 100%;
+      padding: 15px;
+      background: #ff4d79;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">YAY! It's BOGO</h1>
+    
+    <div class="price-option" onclick="selectOption(0)">
+      <div class="option-header">
+        <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
+        <span class="unit-text">1 Unit</span>
+        <span class="discount-badge">10% Off</span>
+        <span class="price">
+          $10.00 USD
+          <span class="original-price">$24.00 USD</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="price-option most-popular" onclick="selectOption(1)">
+      <span class="most-popular-tag">MOST POPULAR</span>
+      <div class="option-header">
+        <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
+        <span class="unit-text">2 Unit</span>
+        <span class="discount-badge">20% Off</span>
+        <span class="price">
+          $18.00 USD
+          <span class="original-price">$24.00 USD</span>
+        </span>
+      </div>
+      <div class="options-container">
+        <div class="select-wrapper">
+          <select>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="blue">Blue</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select>
+            <option value="color">Color</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-option" onclick="selectOption(2)">
+      <div class="option-header">
+        <input type="radio" name="unit" class="radio-input" onclick="event.stopPropagation()">
+        <span class="unit-text">3 Unit</span>
+        <span class="discount-badge">30% Off</span>
+        <span class="price">
+          $24.00 USD
+          <span class="original-price">$24.00 USD</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="delivery-info">
+      <span>Free Delivery</span>
+      <span>Total : $18.00 USD</span>
+    </div>
+
+    <button class="add-to-cart">+ Add to Cart</button>
+    
+  </div>
+
+  <script>
+    function selectOption(index) {
+      const options = document.querySelectorAll('.price-option');
+      const radios = document.querySelectorAll('.radio-input');
+      
+      options.forEach((option, i) => {
+        if (i === index) {
+          option.classList.add('active');
+          radios[i].checked = true;
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    }
+
+    selectOption(1);
+  </script>
+</body>
+</html>
